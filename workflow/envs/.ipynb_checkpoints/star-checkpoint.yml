@@ -1,0 +1,6 @@
+name: star
+channels:
+  - bioconda
+dependencies:
+  - star=2.7.11b
+prefix: /data/cephfs-1/work/groups/keller/users/steiertd_c/miniforge3/envs/star

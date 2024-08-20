@@ -1,0 +1,11 @@
+include: "rules/00_Variable_Setup.smk"
+include: "rules/01_Symlink_Files.smk"
+include: "rules/02_STAR_Alignment.smk"
+include: "rules/03_Generate_Count_Matrix.smk"
+
+
+rule all:
+    input:
+        count_Matrix = os.path.join(work_dir, count_matrix_dir, "CountMatrix.csv"),
+        count_Matrix_non_zero = os.path.join(work_dir, count_matrix_dir, "CountMatrix_non_zero_count.csv"),
+        count_Matrix_protein_coding_non_zeri = os.path.join(work_dir, count_matrix_dir, "CountMatrix_non_zero_count_protein_coding_only.csv")

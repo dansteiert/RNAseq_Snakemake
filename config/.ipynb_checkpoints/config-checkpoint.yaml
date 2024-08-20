@@ -1,0 +1,11 @@
+gtf: "/data/cephfs-1/work/projects/cubit/18.12/static_data/annotation/ENSEMBL/86/GRCh38/Homo_sapiens.GRCh38.86.gtf"
+genome: "/data/cephfs-1/work/projects/cubit/18.12/static_data/reference/GRCh38/hs38DH/hs38DH.fa"
+genome_version: "GRCh38.ENSEMBLE_86"
+read_length: 150
+
+work_dir: "/data/cephfs-1/home/users/steiertd_c/work/SENP3/RNAseq_snakemake_workflow"
+genome_index_dir: "/data/cephfs-1/home/users/steiertd_c/work/Genome_indices"
+
+two_pass: true
+sequencing_strand: "unstranded" # unstranded, forward, reverse
+metadata_file: "/data/cephfs-1/home/users/steiertd_c/work/SENP3/RNAseq_snakemake_workflow/metadata.csv" # Sample_Name, Read (R1/R2), Absolute_Path
