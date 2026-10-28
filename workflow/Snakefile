@@ -1,11 +1,28 @@
 include: "rules/00_Variable_Setup.smk"
 include: "rules/01_Symlink_Files.smk"
-include: "rules/02_STAR_Alignment.smk"
-include: "rules/03_Generate_Count_Matrix.smk"
+include: "rules/02_FastQC.smk"
+include: "rules/03_Trimming.smk"         
+include: "rules/04_MultiQC.smk"
+include: "rules/05_STAR_Alignment.smk"
+include: "rules/06_Generate_Count_Matrix.smk"
 
+SAMPLES = config["sample"]
 
 rule all:
     input:
         count_Matrix = os.path.join(work_dir, count_matrix_dir, "CountMatrix.csv"),
         count_Matrix_non_zero = os.path.join(work_dir, count_matrix_dir, "CountMatrix_non_zero_count.csv"),
-        count_Matrix_protein_coding_non_zeri = os.path.join(work_dir, count_matrix_dir, "CountMatrix_non_zero_count_protein_coding_only.csv")
+        count_Matrix_protein_coding_non_zeri = os.path.join(work_dir, count_matrix_dir, "CountMatrix_non_zero_count_protein_coding_only.csv"),
+        fastqc_html = expand(os.path.join(work_dir, "metrics", "{sample}_R{read}_fastqc.html"), 
+                            sample=SAMPLES, read=['1', '2']),
+        fastqc_zip = expand(os.path.join(work_dir, "metrics", "{sample}_R{read}_fastqc.zip"), 
+                           sample=SAMPLES, read=['1', '2']),
+        trimmed_fastqc_html = expand(os.path.join(work_dir, "metrics", "trimmed", "{sample}_R{read}_trimmed_fastqc.html"),
+                                    sample=SAMPLES, read=['1', '2']),
+        trimmed_fastqc_zip = expand(os.path.join(work_dir, "metrics", "trimmed", "{sample}_R{read}_trimmed_fastqc.zip"),
+                                   sample=SAMPLES, read=['1', '2']),
+        fastp_html = expand(os.path.join(work_dir, trimmed_fastq_dir, "{sample}_fastp.html"),
+                           sample=SAMPLES),
+        fastp_json = expand(os.path.join(work_dir, trimmed_fastq_dir, "{sample}_fastp.json"),
+                           sample=SAMPLES),
+        multiqc_html = os.path.join(work_dir, "multiqc", "RNA-seq-QC-Report_multiqc_report.html")
